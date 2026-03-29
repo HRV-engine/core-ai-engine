@@ -4,8 +4,6 @@ on:
   workflow_dispatch:
   push:
     branches: [ main ]
-  schedule:
-    - cron: "0 0 * * *"
 
 jobs:
   run-baseline:
@@ -21,14 +19,21 @@ jobs:
           python-version: "3.10"
 
       - name: 라이브러리 설치
-        run: |
-          pip install numpy pydantic
+        run: pip install numpy pydantic
 
       - name: baseline 실행
         run: python baseline.py
+
+      # 🔥 이거 추가 (핵심)
+      - name: 파일 확인
+        run: |
+          echo "현재 경로:"
+          pwd
+          echo "파일 목록:"
+          ls -al
 
       - name: 결과 업로드 (artifact)
         uses: actions/upload-artifact@v3
         with:
           name: baseline-result
-          path: result.json
+          path: ./result.json
