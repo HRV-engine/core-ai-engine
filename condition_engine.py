@@ -9,7 +9,7 @@ from typing import Optional
 import json
 
 # 기존 모듈 import
-from baseline import Baseline
+from score  import Baseline
 from score import compute_scores, DailyMetrics
 from penalty import compute_penalties
 
