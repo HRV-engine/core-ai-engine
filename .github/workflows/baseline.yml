@@ -1,4 +1,4 @@
-name: Run Baseline Engine
+name: Run Health Condition Engine
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  run-baseline:
+  run-engine:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,17 +21,23 @@ jobs:
       - name: 라이브러리 설치
         run: pip install numpy pydantic
 
+      # 1️⃣ baseline 생성
       - name: baseline 실행
         run: python baseline.py
 
-      - name: score 실행
-        run: python score.py
+      # 2️⃣ condition (score + penalty 포함)
+      - name: condition 실행
+        run: python condition_engine.py
 
-      - name: 파일 확인 (디버그)
+      # 3️⃣ 파일 확인
+      - name: 파일 확인
         run: ls -al
 
-      - name: 결과 업로드 (artifact)
+      # 4️⃣ 결과 업로드
+      - name: 결과 업로드
         uses: actions/upload-artifact@v4
         with:
-          name: baseline-result
-          path: ./result.json
+          name: health-condition-result
+          path: |
+            result.json
+            condition.json
