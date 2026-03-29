@@ -239,6 +239,7 @@ if __name__ == "__main__":
 
     # 결과 저장
     with open("result.json", "w") as f:
-        json.dump(result.dict(), f, indent=2)
+        json.dump(result.model_dump(), f, indent=2)
 
-    print("Baseline Result:", result.json(indent=2))
+    print("Baseline Result:")
+    print(result.model_dump_json(indent=2))
