@@ -24,6 +24,9 @@ jobs:
       - name: baseline 실행
         run: python baseline.py
 
+      - name: score 실행
+        run: python score.py
+
       - name: 파일 확인 (디버그)
         run: ls -al
 
