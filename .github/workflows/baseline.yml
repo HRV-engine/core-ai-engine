@@ -24,13 +24,8 @@ jobs:
       - name: baseline 실행
         run: python baseline.py
 
-      # 🔥 이거 추가 (핵심)
-      - name: 파일 확인
-        run: |
-          echo "현재 경로:"
-          pwd
-          echo "파일 목록:"
-          ls -al
+      - name: 파일 확인 (디버그)
+        run: ls -al
 
       - name: 결과 업로드 (artifact)
         uses: actions/upload-artifact@v3
